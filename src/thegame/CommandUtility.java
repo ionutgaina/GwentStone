@@ -54,18 +54,18 @@ public final class CommandUtility {
                 return null;
         }
     }
-    
+
     private static ObjectNode cardUsesAttack(Coordinates attacker, Coordinates attacked, Table table) {
         Game game = Game.getInstance();
         Minion attackerMinion = table.getCard(attacker.getX(), attacker.getY());
         Minion attackedMinion = table.getCard(attacked.getX(), attacked.getY());
 
-        int activePlayer = game.getRound().getPlayerActive();
 
-        ObjectNode output = cardAttackerIsFree(attacker, attacked, attackerMinion;
+        ObjectNode output = cardAttackerIsFree(attacker, attacked, attackerMinion);
         if(output != null){
             return output;
         }
+        int activePlayer = game.getRound().getPlayerActive();
 
         //! If card is not on enemy row then isn't an enemy card
         if(!table.isEnemyRow(attacked.getX(), activePlayer))
