@@ -16,7 +16,7 @@ public class Table {
     private ArrayList<Minion> thirdRow = new ArrayList<>();
     private ArrayList<Minion> fourthRow = new ArrayList<>();
 
-    private ArrayList<Minion> getRow(int index) {
+    public ArrayList<Minion> getRow(int index) {
         switch (index) {
             case 0:
                 return firstRow;
@@ -39,15 +39,13 @@ public class Table {
         String[] backRowMinions = {"Sentinel", "Berserker", "The Cursed One", "Disciple"};
         List<String> list = Arrays.asList(backRowMinions);
 
-        if (list.contains(card.getName())) {
+        if (list.contains(card.getName()))
             row = getBackRow(playerIdx);
-            if (row.size() >= 5) return false;
-            row.add(card);
-        } else {
+        else
             row = getFirstRow(playerIdx);
-            if (row.size() >= 5) return false;
-            row.add(card);
-        }
+
+        if (isFull(row)) return false;
+        row.add(card);
         return true;
     }
 
@@ -56,7 +54,6 @@ public class Table {
             return affectedRow == 0 || affectedRow == 1;
         }
         return affectedRow == 2 || affectedRow == 3;
-
     }
 
     public ArrayList<Minion> getBackRow(int playerIdx) {
@@ -68,4 +65,24 @@ public class Table {
         if (playerIdx == 1) return getRow(2);
         return getRow(1);
     }
+
+    public boolean isFull(ArrayList<Minion> row) {
+        return row.size() >= 5;
+    }
+
+    public ArrayList<Minion> getReflectedRow(int index) {
+        switch (index) {
+            case 0:
+                return getRow(3);
+            case 1:
+                return getRow(2);
+            case 2:
+                return getRow(1);
+            case 3:
+                return getRow(0);
+            default:
+                return new ArrayList<>();
+        }
+    }
+
 }

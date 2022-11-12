@@ -54,13 +54,34 @@ public final class CommandUtility {
         if(card.getCardType().equals("Minion")) {
             return useEnvironmentError("Chosen card is not of type environment.", handIdx, affectedRow);
         }
-        Environment minionCard = new Environment(card);
+        Environment environmentCard = new Environment(card);
 
-        if (player.getMana() < minionCard.getMana()) {
+        if (player.getMana() < environmentCard.getMana()) {
             return useEnvironmentError("Not enough mana to use environment card.", handIdx, affectedRow);
         }
 
+        if(!table.isEnemyRow(affectedRow, playerIdx)){
+            return useEnvironmentError("Chosen row does not belong to the enemy.", handIdx, affectedRow);
+        }
 
+        if(environmentCard.getName().equals("Heart Hound"))
+        {
+            ArrayList<Minion> row;
+            //! Verify the reflected row (firstRow or backRow)
+            if( affectedRow == 0 || affectedRow == 3)
+                row = table.getBackRow(playerIdx);
+            else
+                row = table.getFirstRow(playerIdx);
+
+            if(table.isFull(row)) {
+                String message = "Chosen row does not belong to the enemy.";
+                return useEnvironmentError(message, handIdx, affectedRow);
+            }
+        }
+
+        environmentCard.useCardEffect(table, affectedRow);
+        player.getPlayingHand().removeCard(handIdx);
+        player.decreaseMana(environmentCard.getMana());
         return null;
     }
 
