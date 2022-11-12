@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import fileio.ActionsInput;
 import fileio.CardInput;
+import thegame.cards.Environment;
 import thegame.cards.Hero;
 import thegame.cards.Minion;
 import thegame.play.*;
@@ -18,6 +19,11 @@ public final class CommandUtility {
     public static ObjectNode commandAction(ActionsInput action) {
         Game game = Game.getInstance();
         switch (action.getCommand()) {
+            case "useEnvironmentCard":
+            {
+                Player activePlayer = game.getPlayer(game.getRound().getPlayerActive());
+                return useEnvironmentCard(action.getHandIdx(), action.getAffectedRow(), activePlayer);
+            }
             case "getCardsOnTable":
                 return getCardsOnTable(game.getTable());
             case "placeCard":
@@ -38,6 +44,34 @@ public final class CommandUtility {
             default:
                 return null;
         }
+    }
+    private static ObjectNode useEnvironmentCard(int handIdx, int affectedRow, Player player) {
+        Table table = Game.getInstance().getTable();
+        int playerIdx = player.getId();
+        Hand hand = player.getPlayingHand();
+        CardInput card = hand.getCards().get(handIdx);
+
+        if(card.getCardType().equals("Minion")) {
+            return useEnvironmentError("Chosen card is not of type environment.", handIdx, affectedRow);
+        }
+        Environment minionCard = new Environment(card);
+
+        if (player.getMana() < minionCard.getMana()) {
+            return useEnvironmentError("Not enough mana to use environment card.", handIdx, affectedRow);
+        }
+
+
+        return null;
+    }
+
+    private static ObjectNode useEnvironmentError(String message, int handIdx, int affectedRow) {
+        ObjectMapper objectMapper = new ObjectMapper();
+        ObjectNode output = objectMapper.createObjectNode();
+        output.put("command", "placeCarduseEnvironmentCard");
+        output.put("handIdx", handIdx);
+        output.put("affectedRow", affectedRow);
+        output.put("error", message);
+        return output;
     }
 
     private static ObjectNode getCardsOnTable(Table table) {

@@ -41,27 +41,31 @@ public class Table {
 
         if (list.contains(card.getName())) {
             row = getBackRow(playerIdx);
-            if (row.size() >= 5)
-                return false;
+            if (row.size() >= 5) return false;
             row.add(card);
         } else {
             row = getFirstRow(playerIdx);
-            if (row.size() >= 5)
-                return false;
+            if (row.size() >= 5) return false;
             row.add(card);
         }
         return true;
     }
 
+    public boolean isEnemyRow(int affectedRow, int playerIdx) {
+        if (playerIdx == 1) {
+            return affectedRow == 0 || affectedRow == 1;
+        }
+        return affectedRow == 2 || affectedRow == 3;
+
+    }
+
     public ArrayList<Minion> getBackRow(int playerIdx) {
-        if (playerIdx == 1)
-            return getRow(3);
+        if (playerIdx == 1) return getRow(3);
         return getRow(0);
     }
 
     public ArrayList<Minion> getFirstRow(int playerIdx) {
-        if (playerIdx == 1)
-            return getRow(2);
+        if (playerIdx == 1) return getRow(2);
         return getRow(1);
     }
 }
