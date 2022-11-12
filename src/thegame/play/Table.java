@@ -29,9 +29,27 @@ public class Table {
         }
     }
 
-    private Minion getCard(Coordinates coordinates) {
-        ArrayList<Minion> row = getRow(coordinates.getY());
-        return row.get(coordinates.getX());
+    public void setRow(int index, ArrayList<Minion> row) {
+        switch (index) {
+            case 0:
+                firstRow = row;
+                return;
+            case 1:
+                secondRow = row;
+                return;
+            case 2:
+                thirdRow = row;
+                return;
+            default:
+                fourthRow = row;
+        }
+    }
+
+    public Minion getCard(int x, int y) {
+        ArrayList<Minion> row = getRow(x);
+        if ( row.size() <= y)
+            return null;
+        return row.get(y);
     }
 
     public boolean putCardOnTable(Minion card, int playerIdx) {

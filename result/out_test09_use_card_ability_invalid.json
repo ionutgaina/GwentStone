@@ -1,4 +1,24 @@
 [ {
+  "command" : "getCardAtPosition",
+  "output" : {
+    "mana" : 3,
+    "attackDamage" : 6,
+    "health" : 4,
+    "description" : "Standard card: Death incarnate. No better time to die than now.",
+    "colors" : [ "Orange", "Red", "Black" ],
+    "name" : "The Ripper"
+  }
+}, {
+  "command" : "getCardAtPosition",
+  "output" : {
+    "mana" : 3,
+    "attackDamage" : 6,
+    "health" : 4,
+    "description" : "Standard card: Death incarnate. No better time to die than now.",
+    "colors" : [ "Orange", "Red", "Black" ],
+    "name" : "The Ripper"
+  }
+}, {
   "command" : "getCardsInHand",
   "playerIdx" : 2,
   "output" : [ {

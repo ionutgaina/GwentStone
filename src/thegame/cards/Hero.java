@@ -17,9 +17,4 @@ public class Hero extends CardInput {
         super(card);
         setHealth(HERO_MAX_HEALTH);
     }
-
-    @Override
-    public String whatTypeCardIAm() {
-        return "Hero";
-    }
 }

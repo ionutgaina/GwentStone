@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import thegame.play.Table;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Comparator;
 
@@ -39,7 +40,14 @@ public class Environment extends CardInput {
 
     private void effectFirestorm(Table table, int affectedRow) {
         ArrayList<Minion> row = table.getRow(affectedRow);
-        row.forEach(minion -> minion.setHealth(minion.getHealth() - 2));
+        ArrayList<Minion> aliveRow = new ArrayList<>();
+        row.forEach(minion -> {
+            minion.setHealth(minion.getHealth() - 1);
+            if(minion.getHealth() > 0)
+                aliveRow.add(minion);
+        });
+
+        table.setRow(affectedRow, aliveRow);
     }
 
     private void effectWinterfell(Table table, int affectedRow) {
@@ -54,10 +62,5 @@ public class Environment extends CardInput {
         ArrayList<Minion> friendlyRow = table.getReflectedRow(affectedRow);
         friendlyRow.add(bigHealthMinion);
         enemyRow.remove(bigHealthMinion);
-    }
-
-    @Override
-    public String whatTypeCardIAm() {
-        return "Environment";
     }
 }

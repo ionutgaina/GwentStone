@@ -21,9 +21,4 @@ public class Minion extends CardInput {
     public void unfrozen() {
         frozen = false;
     }
-
-    @Override
-    public String whatTypeCardIAm() {
-        return "Minion";
-    }
 }

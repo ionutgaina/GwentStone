@@ -3,6 +3,7 @@ package thegame.play;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import fileio.CardInput;
 import lombok.Data;
+import thegame.cards.Environment;
 
 import java.util.ArrayList;
 
@@ -33,5 +34,16 @@ public class Hand {
     public void removeCard(int cardIdx) {
         cards.remove(cardIdx);
         nrOfCards--;
+    }
+
+    public ArrayList<Environment> getEnvironmentCards() {
+        ArrayList<Environment> environmentCards = new ArrayList<>();
+
+        cards.forEach( card -> {
+            if (card.getCardType().equals("Environment"))
+                environmentCards.add(new Environment(card));
+        });
+
+        return environmentCards;
     }
 }

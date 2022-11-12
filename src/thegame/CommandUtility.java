@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import fileio.ActionsInput;
 import fileio.CardInput;
+import fileio.Coordinates;
 import thegame.cards.Environment;
 import thegame.cards.Hero;
 import thegame.cards.Minion;
@@ -19,6 +20,10 @@ public final class CommandUtility {
     public static ObjectNode commandAction(ActionsInput action) {
         Game game = Game.getInstance();
         switch (action.getCommand()) {
+            case "getEnvironmentCardsInHand":
+                return getEnvironmentCardsInHand(game.getPlayer(action.getPlayerIdx()));
+            case "getCardAtPosition":
+                return getCardAtPosition(action.getX(), action.getY(), game.getTable());
             case "useEnvironmentCard":
             {
                 Player activePlayer = game.getPlayer(game.getRound().getPlayerActive());
@@ -45,6 +50,29 @@ public final class CommandUtility {
                 return null;
         }
     }
+    private static ObjectNode getEnvironmentCardsInHand(Player player) {
+        ArrayList<Environment> environmentCards = player.getPlayingHand().getEnvironmentCards();
+
+        ObjectMapper objectMapper = new ObjectMapper();
+        ObjectNode output = objectMapper.createObjectNode();
+        output.put("command", "getEnvironmentCardsInHand");
+        output.put("playerIdx", player.getId());
+        output.putPOJO("output", new ArrayList<>(environmentCards));
+        return output;
+    }
+
+    private static ObjectNode getCardAtPosition(int x, int y, Table table) {
+        Minion minionCard = table.getCard(x,y);
+        if(minionCard == null) {
+            return null;
+        }
+        ObjectMapper objectMapper = new ObjectMapper();
+        ObjectNode output = objectMapper.createObjectNode();
+        output.put("command", "getCardAtPosition");
+        output.putPOJO("output", new Minion(minionCard));
+        return output;
+    }
+
     private static ObjectNode useEnvironmentCard(int handIdx, int affectedRow, Player player) {
         Table table = Game.getInstance().getTable();
         int playerIdx = player.getId();
