@@ -20,6 +20,8 @@ public final class CommandUtility {
     public static ObjectNode commandAction(ActionsInput action) {
         Game game = Game.getInstance();
         switch (action.getCommand()) {
+            case "getFrozenCardsOnTable":
+                return getFrozenCardsOnTable(game.getTable());
             case "getEnvironmentCardsInHand":
                 return getEnvironmentCardsInHand(game.getPlayer(action.getPlayerIdx()));
             case "getCardAtPosition":
@@ -50,6 +52,14 @@ public final class CommandUtility {
                 return null;
         }
     }
+    private static ObjectNode getFrozenCardsOnTable(Table table) {
+        ObjectMapper objectMapper = new ObjectMapper();
+        ObjectNode output = objectMapper.createObjectNode();
+        output.put("command", "getFrozenCardsOnTable");
+        output.putPOJO("output", new ArrayList<>(table.getFrozenMinionTable()));
+        return output;
+    }
+
     private static ObjectNode getEnvironmentCardsInHand(Player player) {
         ArrayList<Environment> environmentCards = player.getPlayingHand().getEnvironmentCards();
 
@@ -102,7 +112,7 @@ public final class CommandUtility {
                 row = table.getFirstRow(playerIdx);
 
             if(table.isFull(row)) {
-                String message = "Chosen row does not belong to the enemy.";
+                String message = "Cannot steal enemy card since the player's row is full.";
                 return useEnvironmentError(message, handIdx, affectedRow);
             }
         }
@@ -116,7 +126,7 @@ public final class CommandUtility {
     private static ObjectNode useEnvironmentError(String message, int handIdx, int affectedRow) {
         ObjectMapper objectMapper = new ObjectMapper();
         ObjectNode output = objectMapper.createObjectNode();
-        output.put("command", "placeCarduseEnvironmentCard");
+        output.put("command", "useEnvironmentCard");
         output.put("handIdx", handIdx);
         output.put("affectedRow", affectedRow);
         output.put("error", message);

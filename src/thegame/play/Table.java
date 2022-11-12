@@ -1,6 +1,5 @@
 package thegame.play;
 
-import fileio.Coordinates;
 import lombok.Data;
 import thegame.cards.Minion;
 
@@ -47,8 +46,7 @@ public class Table {
 
     public Minion getCard(int x, int y) {
         ArrayList<Minion> row = getRow(x);
-        if ( row.size() <= y)
-            return null;
+        if (row.size() <= y) return null;
         return row.get(y);
     }
 
@@ -57,10 +55,8 @@ public class Table {
         String[] backRowMinions = {"Sentinel", "Berserker", "The Cursed One", "Disciple"};
         List<String> list = Arrays.asList(backRowMinions);
 
-        if (list.contains(card.getName()))
-            row = getBackRow(playerIdx);
-        else
-            row = getFirstRow(playerIdx);
+        if (list.contains(card.getName())) row = getBackRow(playerIdx);
+        else row = getFirstRow(playerIdx);
 
         if (isFull(row)) return false;
         row.add(card);
@@ -101,6 +97,25 @@ public class Table {
             default:
                 return new ArrayList<>();
         }
+    }
+
+    public ArrayList<Minion> getFrozenMinionRow(int rowIdx) {
+        ArrayList<Minion> row = getRow(rowIdx);
+        ArrayList<Minion> frozenRow = new ArrayList<>();
+
+        row.forEach(minion -> {
+            if (minion.isFrozen()) frozenRow.add(minion);
+        });
+        return frozenRow;
+    }
+
+    public ArrayList<Minion> getFrozenMinionTable() {
+        final int MAXROW = 3;
+        ArrayList<Minion> allFrozenCards = new ArrayList<>();
+        for (int i = 0 ; i <= MAXROW; i++) {
+            Arrays.fill(new ArrayList[]{allFrozenCards}, getFrozenMinionRow(i));
+        }
+        return allFrozenCards;
     }
 
 }

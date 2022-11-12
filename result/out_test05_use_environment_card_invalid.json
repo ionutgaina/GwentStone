@@ -32,6 +32,9 @@
   "playerIdx" : 1,
   "output" : [ ]
 }, {
+  "command" : "getFrozenCardsOnTable",
+  "output" : [ ]
+}, {
   "command" : "getPlayerTurn",
   "output" : 1
 }, {
@@ -55,25 +58,25 @@
     "name" : "Goliath"
   }
 }, {
-  "command" : "placeCarduseEnvironmentCard",
+  "command" : "useEnvironmentCard",
   "handIdx" : 0,
   "affectedRow" : 2,
   "error" : "Not enough mana to use environment card."
 }, {
-  "command" : "placeCarduseEnvironmentCard",
+  "command" : "useEnvironmentCard",
   "handIdx" : 0,
   "affectedRow" : 3,
   "error" : "Chosen card is not of type environment."
 }, {
-  "command" : "placeCarduseEnvironmentCard",
+  "command" : "useEnvironmentCard",
   "handIdx" : 0,
   "affectedRow" : 3,
   "error" : "Chosen row does not belong to the enemy."
 }, {
-  "command" : "placeCarduseEnvironmentCard",
+  "command" : "useEnvironmentCard",
   "handIdx" : 0,
   "affectedRow" : 2,
-  "error" : "Chosen row does not belong to the enemy."
+  "error" : "Cannot steal enemy card since the player's row is full."
 }, {
   "command" : "getPlayerMana",
   "playerIdx" : 1,
