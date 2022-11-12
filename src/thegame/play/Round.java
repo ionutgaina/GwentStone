@@ -1,6 +1,9 @@
 package thegame.play;
 
 import lombok.Data;
+import thegame.cards.Minion;
+
+import java.util.ArrayList;
 
 @Data
 public class Round {
@@ -27,6 +30,18 @@ public class Round {
     }
 
     public void nextTurn() {
+        Game game = Game.getInstance();
+        ArrayList<Minion> row;
+        int currentPlayerIdx = getPlayerActive();
+
+        //! reset current player firstRow
+        row = game.getTable().getFirstRow(currentPlayerIdx);
+        row.forEach(Minion::resetStates);
+
+        //! reset current player backRow
+        row = game.getTable().getBackRow(currentPlayerIdx);
+        row.forEach(Minion::resetStates);
+
         nrOfTurn++;
         nrOfTurn %= 2;
     }

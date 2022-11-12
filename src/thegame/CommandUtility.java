@@ -10,24 +10,26 @@ import thegame.cards.Hero;
 import thegame.cards.Minion;
 import thegame.play.*;
 
-import java.sql.Array;
 import java.util.ArrayList;
 
 public final class CommandUtility {
     //! This is an utility class
-    private CommandUtility() { }
+    private CommandUtility() {
+    }
 
     public static ObjectNode commandAction(ActionsInput action) {
         Game game = Game.getInstance();
         switch (action.getCommand()) {
+            case "cardUsesAttack": {
+                return cardUsesAttack(action.getCardAttacker(), action.getCardAttacked(), game.getTable());
+            }
             case "getFrozenCardsOnTable":
                 return getFrozenCardsOnTable(game.getTable());
             case "getEnvironmentCardsInHand":
                 return getEnvironmentCardsInHand(game.getPlayer(action.getPlayerIdx()));
             case "getCardAtPosition":
                 return getCardAtPosition(action.getX(), action.getY(), game.getTable());
-            case "useEnvironmentCard":
-            {
+            case "useEnvironmentCard": {
                 Player activePlayer = game.getPlayer(game.getRound().getPlayerActive());
                 return useEnvironmentCard(action.getHandIdx(), action.getAffectedRow(), activePlayer);
             }
@@ -52,6 +54,49 @@ public final class CommandUtility {
                 return null;
         }
     }
+    
+    private static ObjectNode cardUsesAttack(Coordinates attacker, Coordinates attacked, Table table) {
+        Game game = Game.getInstance();
+        Minion attackerMinion = table.getCard(attacker.getX(), attacker.getY());
+        Minion attackedMinion = table.getCard(attacked.getX(), attacked.getY());
+
+        int activePlayer = game.getRound().getPlayerActive();
+
+        ObjectNode output = cardAttackerIsFree(attacker, attacked, attackerMinion;
+        if(output != null){
+            return output;
+        }
+
+        //! If card is not on enemy row then isn't an enemy card
+        if(!table.isEnemyRow(attacked.getX(), activePlayer))
+            return cardUsesAttackError(attacker, attacked, "Attacked card does not belong to the enemy.");
+
+        if(table.enemyIsHavingTank(activePlayer) && !attackedMinion.isTank())
+            return cardUsesAttackError(attacker, attacked, "Attacked card is not of type 'Tank'.");
+
+        attackerMinion.attackCard(attacked);
+        return null;
+    }
+
+    private static ObjectNode cardAttackerIsFree(Coordinates attacker, Coordinates attacked, Minion attackerMinion) {
+        if(attackerMinion.isFrozen())
+            return cardUsesAttackError(attacker, attacked, "Attacker card is frozen.");
+
+        if(attackerMinion.isFought())
+            return cardUsesAttackError(attacker, attacked, "Attacker card has already attacked this turn.");
+        return null;
+    }
+
+    private static ObjectNode cardUsesAttackError(Coordinates attacker, Coordinates attacked, String message) {
+        ObjectMapper objectMapper = new ObjectMapper();
+        ObjectNode output = objectMapper.createObjectNode();
+        output.put("command", "cardUsesAttack");
+        output.putPOJO("cardAttacker", attacker);
+        output.putPOJO("cardAttacked", attacked);
+        output.put("error", message);
+        return output;
+    }
+
     private static ObjectNode getFrozenCardsOnTable(Table table) {
         ObjectMapper objectMapper = new ObjectMapper();
         ObjectNode output = objectMapper.createObjectNode();
@@ -72,8 +117,8 @@ public final class CommandUtility {
     }
 
     private static ObjectNode getCardAtPosition(int x, int y, Table table) {
-        Minion minionCard = table.getCard(x,y);
-        if(minionCard == null) {
+        Minion minionCard = table.getCard(x, y);
+        if (minionCard == null) {
             return null;
         }
         ObjectMapper objectMapper = new ObjectMapper();
@@ -89,7 +134,7 @@ public final class CommandUtility {
         Hand hand = player.getPlayingHand();
         CardInput card = hand.getCards().get(handIdx);
 
-        if(card.getCardType().equals("Minion")) {
+        if (card.getCardType().equals("Minion")) {
             return useEnvironmentError("Chosen card is not of type environment.", handIdx, affectedRow);
         }
         Environment environmentCard = new Environment(card);
@@ -98,20 +143,19 @@ public final class CommandUtility {
             return useEnvironmentError("Not enough mana to use environment card.", handIdx, affectedRow);
         }
 
-        if(!table.isEnemyRow(affectedRow, playerIdx)){
+        if (!table.isEnemyRow(affectedRow, playerIdx)) {
             return useEnvironmentError("Chosen row does not belong to the enemy.", handIdx, affectedRow);
         }
 
-        if(environmentCard.getName().equals("Heart Hound"))
-        {
+        if (environmentCard.getName().equals("Heart Hound")) {
             ArrayList<Minion> row;
             //! Verify the reflected row (firstRow or backRow)
-            if( affectedRow == 0 || affectedRow == 3)
+            if (affectedRow == 0 || affectedRow == 3)
                 row = table.getBackRow(playerIdx);
             else
                 row = table.getFirstRow(playerIdx);
 
-            if(table.isFull(row)) {
+            if (table.isFull(row)) {
                 String message = "Cannot steal enemy card since the player's row is full.";
                 return useEnvironmentError(message, handIdx, affectedRow);
             }
@@ -156,13 +200,13 @@ public final class CommandUtility {
         return output;
     }
 
-    private static ObjectNode placeCard(int handIdx, Player player){
+    private static ObjectNode placeCard(int handIdx, Player player) {
         Table table = Game.getInstance().getTable();
         int playerIdx = player.getId();
         Hand hand = player.getPlayingHand();
         CardInput card = hand.getCards().get(handIdx);
 
-        if(card.getCardType().equals("Environment")) {
+        if (card.getCardType().equals("Environment")) {
             return placeCardError("Cannot place environment card on table.", handIdx);
         }
         Minion minionCard = new Minion(card);
@@ -171,7 +215,7 @@ public final class CommandUtility {
             return placeCardError("Not enough mana to place card on table.", handIdx);
         }
         //! If succes then card is added, else is return an error
-        if(!table.putCardOnTable(minionCard, playerIdx)) {
+        if (!table.putCardOnTable(minionCard, playerIdx)) {
             return placeCardError("Cannot place card on table since row is full.", handIdx);
         }
         player.decreaseMana(minionCard.getMana());

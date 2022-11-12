@@ -118,4 +118,28 @@ public class Table {
         return allFrozenCards;
     }
 
+    public boolean enemyIsHavingTank(int activePlayerIdx) {
+        ArrayList<Minion> row;
+        int enemyPlayerIdx = 1;
+
+        if(activePlayerIdx == 1) {
+            enemyPlayerIdx = 2;
+        }
+
+        //! Verify if firstRow of enemey is having Tank Minion
+        row = getFirstRow(enemyPlayerIdx);
+        for (Minion minion: row){
+            if(minion.isTank())
+                return true;
+        }
+
+        //! Verify if backRow of enemy is having Tank Minion
+        row = getBackRow(enemyPlayerIdx);
+        for (Minion minion: row){
+            if(minion.isTank())
+                return true;
+        }
+        return false;
+    }
+
 }
