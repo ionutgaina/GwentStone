@@ -65,7 +65,9 @@
     "description" : "Premium card: Insanity is always an option, now it is an absolute.",
     "colors" : [ "Red", "Black" ],
     "name" : "Miraj"
-  }
+  },
+  "x" : 2,
+  "y" : 0
 }, {
   "command" : "getFrozenCardsOnTable",
   "output" : [ ]
@@ -91,7 +93,9 @@
     "description" : "Premium card: Fear him. Your last breath is now.",
     "colors" : [ "Purple", "Yellow" ],
     "name" : "Berserker"
-  }
+  },
+  "x" : 0,
+  "y" : 0
 }, {
   "command" : "getPlayerTurn",
   "output" : 2
@@ -127,7 +131,9 @@
     "description" : "Premium card: Fear him. Your last breath is now.",
     "colors" : [ "Purple", "Yellow" ],
     "name" : "Berserker"
-  }
+  },
+  "x" : 0,
+  "y" : 0
 }, {
   "command" : "useAttackHero",
   "cardAttacker" : {
@@ -147,7 +153,9 @@
     "description" : "Premium card: Insanity is always an option, now it is an absolute.",
     "colors" : [ "Red", "Black" ],
     "name" : "Miraj"
-  }
+  },
+  "x" : 2,
+  "y" : 0
 }, {
   "command" : "getFrozenCardsOnTable",
   "output" : [ ]
@@ -178,7 +186,9 @@
     "description" : "Premium card: Fear him. Your last breath is now.",
     "colors" : [ "Purple", "Yellow" ],
     "name" : "Berserker"
-  }
+  },
+  "x" : 0,
+  "y" : 0
 }, {
   "command" : "getFrozenCardsOnTable",
   "output" : [ ]

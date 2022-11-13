@@ -7,7 +7,9 @@
     "description" : "Standard card: Thrown from the highest cliff, revenge will be his glory.",
     "colors" : [ "Pink", "Purple" ],
     "name" : "The Cursed One"
-  }
+  },
+  "x" : 3,
+  "y" : 0
 }, {
   "command" : "getCardAtPosition",
   "output" : {
@@ -17,7 +19,9 @@
     "description" : "Standard card: Death incarnate. No better time to die than now.",
     "colors" : [ "Black", "Yellow" ],
     "name" : "The Ripper"
-  }
+  },
+  "x" : 1,
+  "y" : 0
 }, {
   "command" : "getFrozenCardsOnTable",
   "output" : [ ]

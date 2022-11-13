@@ -7,7 +7,9 @@
     "description" : "Standard card: Death incarnate. No better time to die than now.",
     "colors" : [ "Orange", "Red", "Black" ],
     "name" : "The Ripper"
-  }
+  },
+  "x" : 2,
+  "y" : 0
 }, {
   "command" : "getCardAtPosition",
   "output" : {
@@ -17,7 +19,9 @@
     "description" : "Standard card: Death incarnate. No better time to die than now.",
     "colors" : [ "Orange", "Red", "Black" ],
     "name" : "The Ripper"
-  }
+  },
+  "x" : 2,
+  "y" : 0
 }, {
   "command" : "cardUsesAbility",
   "cardAttacker" : {

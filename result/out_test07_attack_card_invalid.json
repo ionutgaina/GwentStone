@@ -18,7 +18,9 @@
     "description" : "Premium card: The will of Gods has been spoken, obey and you shall be saved...or not.",
     "colors" : [ "Yellow", "White" ],
     "name" : "Disciple"
-  }
+  },
+  "x" : 3,
+  "y" : 0
 }, {
   "command" : "getCardsInHand",
   "playerIdx" : 2,
@@ -46,7 +48,9 @@
     "description" : "Standard card: Everything is sacred to him, all is but a gift from the saints.",
     "colors" : [ "Yellow", "White" ],
     "name" : "Disciple"
-  }
+  },
+  "x" : 0,
+  "y" : 0
 }, {
   "command" : "cardUsesAttack",
   "cardAttacker" : {

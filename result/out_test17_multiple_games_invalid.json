@@ -7,7 +7,9 @@
     "description" : "Premium card: Fear him. Your last breath is now.",
     "colors" : [ "Red", "Blue", "Pink" ],
     "name" : "Berserker"
-  }
+  },
+  "x" : 0,
+  "y" : 0
 }, {
   "command" : "getEnvironmentCardsInHand",
   "playerIdx" : 2,
@@ -24,7 +26,9 @@
     "description" : "Premium card: Ravished by the winds of hell, no soul is to be forgiven.",
     "colors" : [ "Orange", "Red", "Black" ],
     "name" : "The Ripper"
-  }
+  },
+  "x" : 2,
+  "y" : 0
 }, {
   "command" : "getEnvironmentCardsInHand",
   "playerIdx" : 1,
@@ -59,7 +63,9 @@
     "description" : "Premium card: Fear him. Your last breath is now.",
     "colors" : [ "Red", "Blue", "Pink" ],
     "name" : "Berserker"
-  }
+  },
+  "x" : 0,
+  "y" : 0
 }, {
   "command" : "getFrozenCardsOnTable",
   "output" : [ ]
@@ -176,7 +182,9 @@
     "description" : "Standard card: When he is near, close your eyes. They betray your mind.",
     "colors" : [ "Yellow", "Orange", "Red" ],
     "name" : "Miraj"
-  }
+  },
+  "x" : 1,
+  "y" : 0
 }, {
   "command" : "getPlayerMana",
   "playerIdx" : 2,
@@ -205,7 +213,9 @@
     "description" : "Standard card: He has seen everything, his mind has never been asleep since the making of the realm.",
     "colors" : [ "Brown", "Blue" ],
     "name" : "Warden"
-  }
+  },
+  "x" : 2,
+  "y" : 0
 }, {
   "command" : "getFrozenCardsOnTable",
   "output" : [ ]
@@ -241,7 +251,9 @@
     "description" : "Standard card: He has seen everything, his mind has never been asleep since the making of the realm.",
     "colors" : [ "Brown", "Blue" ],
     "name" : "Warden"
-  }
+  },
+  "x" : 2,
+  "y" : 0
 }, {
   "command" : "getEnvironmentCardsInHand",
   "playerIdx" : 1,
@@ -271,7 +283,9 @@
     "description" : "Standard card: He has seen everything, his mind has never been asleep since the making of the realm.",
     "colors" : [ "Brown", "Blue" ],
     "name" : "Warden"
-  }
+  },
+  "x" : 2,
+  "y" : 0
 }, {
   "gameEnded" : "Player one killed the enemy hero."
 }, {

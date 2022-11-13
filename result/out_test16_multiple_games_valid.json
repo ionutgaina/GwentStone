@@ -25,7 +25,9 @@
     "description" : "Standard card: A drink can always be served, with the blood of his enemies.",
     "colors" : [ "Red", "Blue", "Pink" ],
     "name" : "Berserker"
-  }
+  },
+  "x" : 0,
+  "y" : 0
 }, {
   "command" : "getEnvironmentCardsInHand",
   "playerIdx" : 2,
@@ -72,7 +74,9 @@
     "description" : "Standard card: A drink can always be served, with the blood of his enemies.",
     "colors" : [ "Red", "Blue", "Pink" ],
     "name" : "Berserker"
-  }
+  },
+  "x" : 0,
+  "y" : 0
 }, {
   "gameEnded" : "Player two killed the enemy hero."
 }, {
@@ -170,7 +174,9 @@
     "description" : "Standard card: He has seen everything, his mind has never been asleep since the making of the realm.",
     "colors" : [ "Brown", "Blue" ],
     "name" : "Warden"
-  }
+  },
+  "x" : 2,
+  "y" : 0
 }, {
   "command" : "getPlayerMana",
   "playerIdx" : 2,
@@ -193,7 +199,9 @@
     "description" : "Standard card: He has seen everything, his mind has never been asleep since the making of the realm.",
     "colors" : [ "Brown", "Blue" ],
     "name" : "Warden"
-  }
+  },
+  "x" : 2,
+  "y" : 0
 }, {
   "command" : "getPlayerMana",
   "playerIdx" : 1,
@@ -213,7 +221,9 @@
     "description" : "Premium card: Nobody suspects an outcast, not even the Gods.",
     "colors" : [ "Pink", "Purple" ],
     "name" : "The Cursed One"
-  }
+  },
+  "x" : 0,
+  "y" : 0
 }, {
   "command" : "getFrozenCardsOnTable",
   "output" : [ ]
@@ -226,7 +236,9 @@
     "description" : "Standard card: He has seen everything, his mind has never been asleep since the making of the realm.",
     "colors" : [ "Brown", "Blue" ],
     "name" : "Warden"
-  }
+  },
+  "x" : 2,
+  "y" : 0
 }, {
   "command" : "getFrozenCardsOnTable",
   "output" : [ ]

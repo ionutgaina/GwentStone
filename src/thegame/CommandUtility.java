@@ -290,6 +290,8 @@ public final class CommandUtility {
         ObjectNode output = objectMapper.createObjectNode();
         output.put("command", "getCardAtPosition");
         output.putPOJO("output", new Minion(minionCard));
+        output.put("x", x);
+        output.put("y", y);
         return output;
     }
 
