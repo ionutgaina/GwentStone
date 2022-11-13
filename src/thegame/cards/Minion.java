@@ -6,6 +6,7 @@ import fileio.Coordinates;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import thegame.play.Game;
+import thegame.play.Table;
 
 import java.util.ArrayList;
 
@@ -28,6 +29,49 @@ public class Minion extends CardInput {
         super(card);
         if(this.getName().equals("Goliath") || this.getName().equals("Warden"))
             this.tank = true;
+    }
+
+    public void useAbilityCard(Coordinates target) {
+        Game game = Game.getInstance();
+        Minion targetMinion = game.getTable().getCard(target.getX(), target.getY());
+        switch (this.getName()) {
+            case "Disciple":
+                abilityGodsPlan(targetMinion);
+                break;
+            case "The Ripper":
+                abilityWeakKnees(targetMinion);
+                break;
+            case "Miraj":
+                abilitySkyJack(targetMinion);
+                break;
+
+            case "The Cursed One":
+                abilityShapeshift(targetMinion, game.getTable().getRow(target.getX()));
+                break;
+            default:
+        }
+        this.setFought(true);
+    }
+    private void abilityGodsPlan(Minion targetMinion) {
+        targetMinion.setHealth(targetMinion.getHealth() + 2);
+    }
+
+    private void abilityWeakKnees(Minion targetMinion) {
+        targetMinion.setAttackDamage(Math.max(targetMinion.getAttackDamage() - 2, 0));
+    }
+
+    private void abilitySkyJack(Minion targetMinion) {
+        int swapHealth = targetMinion.getHealth();
+        targetMinion.setHealth(this.getHealth());
+        this.setHealth(swapHealth);
+    }
+
+    private void abilityShapeshift(Minion targetMinion, ArrayList<Minion> row) {
+        int swapHealth = targetMinion.getHealth();
+        targetMinion.setHealth(targetMinion.getAttackDamage());
+        targetMinion.setAttackDamage(swapHealth);
+        if (targetMinion.getHealth() <= 0)
+            row.remove(targetMinion);
     }
 
     public void attackCard(Coordinates target){

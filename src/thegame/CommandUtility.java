@@ -11,6 +11,8 @@ import thegame.cards.Minion;
 import thegame.play.*;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public final class CommandUtility {
     //! This is an utility class
@@ -20,9 +22,10 @@ public final class CommandUtility {
     public static ObjectNode commandAction(ActionsInput action) {
         Game game = Game.getInstance();
         switch (action.getCommand()) {
-            case "cardUsesAttack": {
+            case "cardUsesAbility":
+                return cardUsesAbility(action.getCardAttacker(), action.getCardAttacked(), game.getTable());
+            case "cardUsesAttack":
                 return cardUsesAttack(action.getCardAttacker(), action.getCardAttacked(), game.getTable());
-            }
             case "getFrozenCardsOnTable":
                 return getFrozenCardsOnTable(game.getTable());
             case "getEnvironmentCardsInHand":
@@ -55,42 +58,91 @@ public final class CommandUtility {
         }
     }
 
+    private static ObjectNode cardUsesAbility(Coordinates attacker, Coordinates attacked, Table table) {
+        Game game = Game.getInstance();
+        Minion attackerMinion = table.getCard(attacker.getX(), attacker.getY());
+        Minion attackedMinion = table.getCard(attacked.getX(), attacked.getY());
+
+        if (attacker.equals(attacked))
+            return null;
+
+        String command = "cardUsesAbility";
+        ObjectNode output = cardAttackerIsOk(attacker, attacked, attackerMinion, command);
+        if (output != null) {
+            return output;
+        }
+
+        int activePlayer = game.getRound().getPlayerActive();
+
+        if (attackerMinion.getName().equals("Disciple") && table.isEnemyRow(attacked.getX(), activePlayer)) {
+            //! If card is on enemy row then isn't a friendly card
+            String message = "Attacked card does not belong to the current player.";
+            return cardAttackError(attacker, attacked, message, command);
+        }
+
+        //! Verify if the card is special with ability to target enemey minion
+        String[] specialMinions = {"The Ripper", "Miraj", "The Cursed One"};
+        List<String> minionsList = Arrays.asList(specialMinions);
+        if (minionsList.contains(attackerMinion.getName())) {
+            output = cardAttackedIsOk(attacker, attacked, attackedMinion, command);
+            if (output != null) {
+                return output;
+            }
+        }
+
+        attackerMinion.useAbilityCard(attacked);
+        return null;
+    }
+
     private static ObjectNode cardUsesAttack(Coordinates attacker, Coordinates attacked, Table table) {
         Game game = Game.getInstance();
         Minion attackerMinion = table.getCard(attacker.getX(), attacker.getY());
         Minion attackedMinion = table.getCard(attacked.getX(), attacked.getY());
 
-
-        ObjectNode output = cardAttackerIsFree(attacker, attacked, attackerMinion);
-        if(output != null){
+        String command = "cardUsesAttack";
+        ObjectNode output = cardAttackerIsOk(attacker, attacked, attackerMinion, command);
+        if (output != null) {
             return output;
         }
-        int activePlayer = game.getRound().getPlayerActive();
 
-        //! If card is not on enemy row then isn't an enemy card
-        if(!table.isEnemyRow(attacked.getX(), activePlayer))
-            return cardUsesAttackError(attacker, attacked, "Attacked card does not belong to the enemy.");
-
-        if(table.enemyIsHavingTank(activePlayer) && !attackedMinion.isTank())
-            return cardUsesAttackError(attacker, attacked, "Attacked card is not of type 'Tank'.");
+        output = cardAttackedIsOk(attacker, attacked, attackedMinion, command);
+        if (output != null) {
+            return output;
+        }
 
         attackerMinion.attackCard(attacked);
         return null;
     }
 
-    private static ObjectNode cardAttackerIsFree(Coordinates attacker, Coordinates attacked, Minion attackerMinion) {
-        if(attackerMinion.isFrozen())
-            return cardUsesAttackError(attacker, attacked, "Attacker card is frozen.");
+    private static ObjectNode cardAttackerIsOk(
+            Coordinates attacker, Coordinates attacked, Minion attackerMinion, String command) {
+        if (attackerMinion.isFrozen())
+            return cardAttackError(attacker, attacked, "Attacker card is frozen.", command);
 
-        if(attackerMinion.isFought())
-            return cardUsesAttackError(attacker, attacked, "Attacker card has already attacked this turn.");
+        if (attackerMinion.isFought())
+            return cardAttackError(attacker, attacked, "Attacker card has already attacked this turn.", command);
         return null;
     }
 
-    private static ObjectNode cardUsesAttackError(Coordinates attacker, Coordinates attacked, String message) {
+    private static ObjectNode cardAttackedIsOk(
+            Coordinates attacker, Coordinates attacked, Minion attackedMinion, String command) {
+        Game game = Game.getInstance();
+        Table table = game.getTable();
+        int activePlayer = game.getRound().getPlayerActive();
+
+        if (!table.isEnemyRow(attacked.getX(), activePlayer))
+            return cardAttackError(attacker, attacked, "Attacked card does not belong to the enemy.", command);
+
+        if (table.enemyIsHavingTank(activePlayer) && !attackedMinion.isTank())
+            return cardAttackError(attacker, attacked, "Attacked card is not of type 'Tank'.", command);
+        return null;
+    }
+
+    private static ObjectNode cardAttackError(
+            Coordinates attacker, Coordinates attacked, String message, String command) {
         ObjectMapper objectMapper = new ObjectMapper();
         ObjectNode output = objectMapper.createObjectNode();
-        output.put("command", "cardUsesAttack");
+        output.put("command", command);
         output.putPOJO("cardAttacker", attacker);
         output.putPOJO("cardAttacked", attacked);
         output.put("error", message);
@@ -150,10 +202,8 @@ public final class CommandUtility {
         if (environmentCard.getName().equals("Heart Hound")) {
             ArrayList<Minion> row;
             //! Verify the reflected row (firstRow or backRow)
-            if (affectedRow == 0 || affectedRow == 3)
-                row = table.getBackRow(playerIdx);
-            else
-                row = table.getFirstRow(playerIdx);
+            if (affectedRow == 0 || affectedRow == 3) row = table.getBackRow(playerIdx);
+            else row = table.getFirstRow(playerIdx);
 
             if (table.isFull(row)) {
                 String message = "Cannot steal enemy card since the player's row is full.";

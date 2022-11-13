@@ -61,7 +61,7 @@
   "output" : {
     "mana" : 4,
     "attackDamage" : 5,
-    "health" : 4,
+    "health" : 2,
     "description" : "Premium card: Insanity is always an option, now it is an absolute.",
     "colors" : [ "Red", "Black" ],
     "name" : "Miraj"
@@ -87,7 +87,7 @@
   "output" : {
     "mana" : 2,
     "attackDamage" : 2,
-    "health" : 2,
+    "health" : 4,
     "description" : "Premium card: Fear him. Your last breath is now.",
     "colors" : [ "Purple", "Yellow" ],
     "name" : "Berserker"
@@ -123,7 +123,7 @@
   "output" : {
     "mana" : 2,
     "attackDamage" : 2,
-    "health" : 1,
+    "health" : 5,
     "description" : "Premium card: Fear him. Your last breath is now.",
     "colors" : [ "Purple", "Yellow" ],
     "name" : "Berserker"
@@ -136,7 +136,7 @@
   "output" : {
     "mana" : 4,
     "attackDamage" : 5,
-    "health" : 4,
+    "health" : 2,
     "description" : "Premium card: Insanity is always an option, now it is an absolute.",
     "colors" : [ "Red", "Black" ],
     "name" : "Miraj"
@@ -167,7 +167,7 @@
   "output" : {
     "mana" : 2,
     "attackDamage" : 2,
-    "health" : 1,
+    "health" : 5,
     "description" : "Premium card: Fear him. Your last breath is now.",
     "colors" : [ "Purple", "Yellow" ],
     "name" : "Berserker"
@@ -215,7 +215,7 @@
   } ], [ {
     "mana" : 4,
     "attackDamage" : 5,
-    "health" : 4,
+    "health" : 2,
     "description" : "Premium card: Insanity is always an option, now it is an absolute.",
     "colors" : [ "Red", "Black" ],
     "name" : "Miraj"

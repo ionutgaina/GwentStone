@@ -3,16 +3,12 @@ G
 .idea/libraries/lib.xml,5/6/563a23e064e6fdd2d09bd0c2d99ef456aff71a31
 J
 src/fileio/DecksInput.java,d/1/d1b58329ca1d4536db4cefc46e6ed68931ae364c
-R
-"result/out_test10_attack_hero.json,9/7/978221849715c0007a9d357e78af065b5f8949fb
 Q
 !src/checker/CheckerConstants.java,6/1/61ea6202265ca285a3b1ff40356917a5b5a6cad8
 E
 src/fileio/Input.java,3/8/3876aa1b7dd7588335854feb66654b90d5e644f1
 ?
 GwentStone2.iml,2/e/2ec2a33168c916f35677b2da49a768c6fac66b3e
-9
-	README.md,8/e/8ec9a00bfd09b3190ac6b22251dbb1aa95a0579d
 N
 ref/ref_test02_place_card.json,e/d/ed97615d1639c0cab1623fe4027ed4a7a56020b3
 N
@@ -35,8 +31,6 @@ X
 (ref/ref_test04_use_environment_card.json,c/f/cfa981c1cdc7a9d6cf30d413329744dcb2ef198c
 I
 src/fileio/CardInput.java,4/6/4654c4b704a57589ae0376d9d6c94843540ea287
-R
-"src/thegame/cards/Environment.java,8/a/8a8ee9350ce55e6e97242603858e612f2d3a2bc1
 [
 +result/out_test04_use_environment_card.json,e/c/ec1e05405c68ec0b8d424f554b5aaf6c646859f0
 `
@@ -45,8 +39,6 @@ R
 .input/test05_use_environment_card_invalid.json,5/9/59909352af388dc319095ef4b5f312c09694b6d9
 c
 3result/out_test05_use_environment_card_invalid.json,c/b/cb2cdaa219c6057309ffa95bbca86c5879a82366
-J
-src/thegame/play/Deck.java,6/6/66e3a9f65bfc9ccb9608f9a6784cd344186b74ca
 L
 src/thegame/play/Player.java,8/f/8f675befcae0dd39c2c39efa77837ffc66e7b757
 J
