@@ -8,7 +8,7 @@ public class Comparators {
     public static class HealthComparator implements Comparator<Minion> {
         @Override
         public int compare(Minion o1, Minion o2) {
-            return o2.getHealth() - o1.getHealth();
+            return o1.getHealth() - o2.getHealth();
         }
     }
     public static class AttackComparator implements Comparator<Minion> {

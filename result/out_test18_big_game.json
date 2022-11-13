@@ -194,12 +194,12 @@
 }, {
   "command" : "getCardsOnTable",
   "output" : [ [ {
-    "mana" : 3,
-    "attackDamage" : 1,
-    "health" : -1,
-    "description" : "Premium card: The will of Gods has been spoken, obey and you shall be saved...or not.",
-    "colors" : [ "Green", "Yellow", "Blue" ],
-    "name" : "Disciple"
+    "mana" : 2,
+    "attackDamage" : 3,
+    "health" : 5,
+    "description" : "Premium card: Fear him. Your last breath is now.",
+    "colors" : [ "Purple", "Yellow" ],
+    "name" : "Berserker"
   } ], [ {
     "mana" : 4,
     "attackDamage" : 5,
@@ -289,4 +289,13 @@
     "colors" : [ "Green", "Yellow", "Blue" ],
     "name" : "Disciple"
   } ]
+}, {
+  "command" : "getTotalGamesPlayed",
+  "output" : 1
+}, {
+  "command" : "getPlayerTwoWins",
+  "output" : 0
+}, {
+  "command" : "getPlayerOneWins",
+  "output" : 1
 } ]

@@ -65,4 +65,9 @@ public class Game {
 
         table = new Table();
     }
+
+    public void winGame(int playerIdx) {
+        Player winner = getPlayer(playerIdx);
+        winner.increaseWinnings();
+    }
 }

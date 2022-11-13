@@ -64,24 +64,9 @@ public class Hero extends CardInput {
 
     private void abilityLowBlow(int affectedRow, Table table) {
         ArrayList<Minion> row = table.getRow(affectedRow);
-        int maxHealth = 0;
-        int indexOfMinion = -1;
 
-        //! TODO
-        //! I tried comparators, for each, but not working row.get(by Object)
-        //! When comparing is taking the same name of card, but not with bigger health
-        for ( int i = 0 ; i < row.size(); i++)
-        {
-            if(row.get(i).getHealth() > maxHealth){
-                maxHealth = row.get(i).getHealth();
-                indexOfMinion = i;
-            }
-        }
-        if (maxHealth != 0) {
-            row.remove(indexOfMinion);
-        }
-//?      Minion bigAttackMinion = Collections.max(row, new Comparators.HealthComparator());
-//?      row.remove(bigHealthMinion);
+        Minion bigHealthMinion = Collections.max(row, new Comparators.HealthComparator());
+        row.remove(bigHealthMinion);
     }
 
     private void abilityEarthBorn(int affectedRow, Table table) {

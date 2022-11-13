@@ -7,9 +7,7 @@ import lombok.EqualsAndHashCode;
 import thegame.Comparators;
 import thegame.play.Table;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Comparator;
 
 @Data

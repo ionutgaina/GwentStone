@@ -22,6 +22,12 @@ public final class CommandUtility {
     public static ObjectNode commandAction(ActionsInput action) {
         Game game = Game.getInstance();
         switch (action.getCommand()) {
+            case "getPlayerTwoWins":
+                return getPlayerWins(2);
+            case "getPlayerOneWins":
+                return getPlayerWins(1);
+            case "getTotalGamesPlayed":
+                return getTotalGamesPlayed();
             case "useHeroAbility":
                 return useHeroAbility(action.getAffectedRow());
             case "useAttackHero":
@@ -60,6 +66,26 @@ public final class CommandUtility {
             default:
                 return null;
         }
+    }
+    private static ObjectNode getPlayerWins(int playerIdx){
+        Game game = Game.getInstance();
+        int TotalWin = game.getPlayer(playerIdx).getNrOfWin();
+        String command = playerIdx == 1 ? "getPlayerOneWins" : "getPlayerTwoWins";
+        ObjectMapper objectMapper = new ObjectMapper();
+        ObjectNode output = objectMapper.createObjectNode();
+        output.put("command", command);
+        output.put("output", TotalWin);
+        return output;
+    }
+
+    private static ObjectNode getTotalGamesPlayed(){
+        Game game = Game.getInstance();
+        int TotalGamesPlayed = game.getPlayerOne().getNrOfGame();
+        ObjectMapper objectMapper = new ObjectMapper();
+        ObjectNode output = objectMapper.createObjectNode();
+        output.put("command", "getTotalGamesPlayed");
+        output.put("output", TotalGamesPlayed);
+        return output;
     }
 
     private static ObjectNode useHeroAbility(int affectected){
@@ -123,7 +149,10 @@ public final class CommandUtility {
         Hero attackedHero = game.getEnemyPlayer(activePlayer).getPlayingHero();
         attackerMinion.attackHero(attackedHero);
         if(attackedHero.isDead())
+        {
+            game.winGame(activePlayer);
             return gameEnded(activePlayer);
+        }
 
         return null;
     }
@@ -180,7 +209,6 @@ public final class CommandUtility {
     }
 
     private static ObjectNode cardUsesAttack(Coordinates attacker, Coordinates attacked, Table table) {
-        Game game = Game.getInstance();
         Minion attackerMinion = table.getCard(attacker.getX(), attacker.getY());
         Minion attackedMinion = table.getCard(attacked.getX(), attacked.getY());
 

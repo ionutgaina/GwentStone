@@ -23,8 +23,6 @@ V
 out.txt,1/e/1e0e364a22c69340e6f02604520fdeb7674264c0
 Z
 *ref/ref_test17_multiple_games_invalid.json,1/5/15acf7ee3e4c880aa791d9f54162faed562a53fe
-L
-ref/ref_test18_big_game.json,4/a/4a0e5dacd111352d503da8700cfe96c9f0c02035
 X
 (ref/ref_test04_use_environment_card.json,c/f/cfa981c1cdc7a9d6cf30d413329744dcb2ef198c
 [
@@ -35,14 +33,10 @@ X
 .input/test05_use_environment_card_invalid.json,5/9/59909352af388dc319095ef4b5f312c09694b6d9
 c
 3result/out_test05_use_environment_card_invalid.json,c/b/cb2cdaa219c6057309ffa95bbca86c5879a82366
-J
-src/thegame/play/Hand.java,5/0/50d010ff6d8955020525cb553d10fcfdc1529386
 K
 src/fileio/Coordinates.java,3/a/3a45e4828df0d9ecfa877560496b32031b093007
 O
 ref/ref_test06_attack_card.json,e/0/e064d6ade0806da4546a3ee4db8b173111b5a301
-K
-src/thegame/play/Table.java,9/f/9f222dda0316d9a0d6aab38dce54336da3b35164
 U
 %input/test07_attack_card_invalid.json,d/f/df9df2acde977018e6ff8111243c0b6dda4b2ebe
 Z
@@ -53,8 +47,6 @@ W
 	README.md,8/e/8ec9a00bfd09b3190ac6b22251dbb1aa95a0579d
 R
 "input/test08_use_card_ability.json,6/1/610633b6195c1501cebde30abbfb7ed4e7a3a9cf
-J
-src/thegame/play/Deck.java,6/6/66e3a9f65bfc9ccb9608f9a6784cd344186b74ca
 T
 $ref/ref_test08_use_card_ability.json,1/9/190a6611cda6c0337dec7f83959adb15c75f539f
 \
@@ -65,14 +57,8 @@ _
 /result/out_test09_use_card_ability_invalid.json,2/f/2f12ea5840dcf3390349c68de0bd00b95a92684a
 a
 1result/out_test15_use_hero_ability_2_invalid.json,2/1/216a4446806b4d6c2ff549e020c8e379f49b508e
-]
--result/out_test17_multiple_games_invalid.json,2/5/259a46709814437d97716f46ac6c5bdd289091a1
-[
-+result/out_test16_multiple_games_valid.json,2/e/2e7a4b4b9c3f9279dae4e354a7a94c283b3729a7
 Y
 )result/out_test14_use_hero_ability_2.json,b/b/bb2dbdad93f3aac96a1ee6c73ab5bf0d380d087c
-O
-result/out_test18_big_game.json,4/7/47f0436f56b90e4ce5bba89b0018425feb6cd264
 O
 ref/ref_test10_attack_hero.json,7/0/70d97491d97ce1327e934dcd70c498063d4aba09
 Z

@@ -8,6 +8,7 @@ import lombok.EqualsAndHashCode;
 import thegame.play.Game;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 @Data
 @EqualsAndHashCode(callSuper = false)
@@ -84,7 +85,9 @@ public class Minion extends CardInput {
         if(targetCard.getHealth() <= 0)
         {
             ArrayList<Minion> targetCardRow = game.getTable().getRow(target.getX());
+            System.out.println(targetCardRow);
             targetCardRow.remove(targetCard);
+            System.out.println(targetCardRow);
         }
         this.setFought(true);
     }
@@ -98,5 +101,31 @@ public class Minion extends CardInput {
     public void resetStates() {
         unfrozen();
         relax();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Minion minion = (Minion) o;
+        return frozen == minion.frozen
+                && fought == minion.fought
+                && tank == minion.tank
+                && this.getName() == minion.getName()
+                && this.getHealth() == minion.getHealth()
+                && this.getAttackDamage() == minion.getAttackDamage();
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(frozen, fought, tank);
+    }
+
+    @Override
+    public String toString() {
+        return "Minion{" +
+                "name=" + this.getName() +
+                "health" + this.getHealth() +
+                '}';
     }
 }

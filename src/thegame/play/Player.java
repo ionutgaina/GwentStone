@@ -82,4 +82,6 @@ public class Player {
     public void decreaseMana(int decMana) {
         mana -= decMana;
     }
+
+    public void increaseWinnings() { nrOfWin++; }
 }
