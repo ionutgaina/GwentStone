@@ -3,8 +3,6 @@ G
 .idea/libraries/lib.xml,5/6/563a23e064e6fdd2d09bd0c2d99ef456aff71a31
 J
 src/fileio/DecksInput.java,d/1/d1b58329ca1d4536db4cefc46e6ed68931ae364c
-Q
-!src/checker/CheckerConstants.java,6/1/61ea6202265ca285a3b1ff40356917a5b5a6cad8
 E
 src/fileio/Input.java,3/8/3876aa1b7dd7588335854feb66654b90d5e644f1
 ?
@@ -35,10 +33,6 @@ O
 ref/ref_test06_attack_card.json,e/0/e064d6ade0806da4546a3ee4db8b173111b5a301
 U
 %input/test07_attack_card_invalid.json,d/f/df9df2acde977018e6ff8111243c0b6dda4b2ebe
-Z
-*result/out_test07_attack_card_invalid.json,4/2/42a12c3e1ec3342db057b6bb485a4b5fe4770fb2
-W
-'ref/ref_test07_attack_card_invalid.json,f/3/f31065ad0811a2efafadd8069ef75ff2201a85a6
 R
 "input/test08_use_card_ability.json,6/1/610633b6195c1501cebde30abbfb7ed4e7a3a9cf
 T

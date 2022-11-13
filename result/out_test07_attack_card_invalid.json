@@ -1,4 +1,9 @@
 [ {
+  "command" : "getCardAtPosition",
+  "output" : "No card available at that position.",
+  "x" : 0,
+  "y" : 3
+}, {
   "command" : "cardUsesAttack",
   "cardAttacker" : {
     "x" : 0,

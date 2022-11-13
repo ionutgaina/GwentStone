@@ -67,7 +67,8 @@ public final class CommandUtility {
                 return null;
         }
     }
-    private static ObjectNode getPlayerWins(int playerIdx){
+
+    private static ObjectNode getPlayerWins(int playerIdx) {
         Game game = Game.getInstance();
         int TotalWin = game.getPlayer(playerIdx).getNrOfWin();
         String command = playerIdx == 1 ? "getPlayerOneWins" : "getPlayerTwoWins";
@@ -78,7 +79,7 @@ public final class CommandUtility {
         return output;
     }
 
-    private static ObjectNode getTotalGamesPlayed(){
+    private static ObjectNode getTotalGamesPlayed() {
         Game game = Game.getInstance();
         int TotalGamesPlayed = game.getPlayerOne().getNrOfGame();
         ObjectMapper objectMapper = new ObjectMapper();
@@ -88,21 +89,21 @@ public final class CommandUtility {
         return output;
     }
 
-    private static ObjectNode useHeroAbility(int affectected){
+    private static ObjectNode useHeroAbility(int affectected) {
         Game game = Game.getInstance();
         Table table = game.getTable();
         int activePlayerIdx = game.getRound().getPlayerActive();
         Player currentPlayer = game.getPlayer(activePlayerIdx);
         Hero playingHero = currentPlayer.getPlayingHero();
 
-        if(currentPlayer.getMana() < playingHero.getMana()) {
+        if (currentPlayer.getMana() < playingHero.getMana()) {
             return userHeroAbilityError(affectected, "Not enough mana to use hero's ability.");
         }
-        if(playingHero.isFought()) {
+        if (playingHero.isFought()) {
             return userHeroAbilityError(affectected, "Hero has already attacked this turn.");
         }
         String heroName = playingHero.getName();
-        if(heroName.equals("Lord Royce") || heroName.equals("Empress Thorina")) {
+        if (heroName.equals("Lord Royce") || heroName.equals("Empress Thorina")) {
             //! if isn't enemy then is friendly row
             if (!table.isEnemyRow(affectected, activePlayerIdx)) {
                 String message = "Selected row does not belong to the enemy.";
@@ -113,7 +114,7 @@ public final class CommandUtility {
             //! if is enemy then isn't friendly row
             if (table.isEnemyRow(affectected, activePlayerIdx)) {
                 String message = "Selected row does not belong to the current player.";
-                return userHeroAbilityError(affectected,message);
+                return userHeroAbilityError(affectected, message);
             }
         }
 
@@ -122,7 +123,7 @@ public final class CommandUtility {
         return null;
     }
 
-    private static ObjectNode userHeroAbilityError(int affectedRow,String message) {
+    private static ObjectNode userHeroAbilityError(int affectedRow, String message) {
         ObjectMapper objectMapper = new ObjectMapper();
         ObjectNode output = objectMapper.createObjectNode();
         output.put("command", "useHeroAbility");
@@ -144,18 +145,18 @@ public final class CommandUtility {
 
         int activePlayer = game.getRound().getPlayerActive();
         if (table.enemyIsHavingTank(activePlayer))
-            return useAttackHeroError(attacker,"Attacked card is not of type 'Tank'.");
+            return useAttackHeroError(attacker, "Attacked card is not of type 'Tank'.");
 
         Hero attackedHero = game.getEnemyPlayer(activePlayer).getPlayingHero();
         attackerMinion.attackHero(attackedHero);
-        if(attackedHero.isDead())
-        {
+        if (attackedHero.isDead()) {
             game.winGame(activePlayer);
             return gameEnded(activePlayer);
         }
 
         return null;
     }
+
     private static ObjectNode gameEnded(int activePlayer) {
         ObjectMapper objectMapper = new ObjectMapper();
         ObjectNode output = objectMapper.createObjectNode();
@@ -283,13 +284,14 @@ public final class CommandUtility {
 
     private static ObjectNode getCardAtPosition(int x, int y, Table table) {
         Minion minionCard = table.getCard(x, y);
-        if (minionCard == null) {
-            return null;
-        }
         ObjectMapper objectMapper = new ObjectMapper();
         ObjectNode output = objectMapper.createObjectNode();
         output.put("command", "getCardAtPosition");
-        output.putPOJO("output", new Minion(minionCard));
+        if (minionCard == null) {
+            output.put("output", "No card available at that position.");
+        } else {
+            output.putPOJO("output", new Minion(minionCard));
+        }
         output.put("x", x);
         output.put("y", y);
         return output;
