@@ -42,6 +42,9 @@ public class Round {
         row = game.getTable().getBackRow(currentPlayerIdx);
         row.forEach(Minion::resetStates);
 
+        //! reset current player Hero
+        game.getPlayer(currentPlayerIdx).getPlayingHero().relax();
+
         nrOfTurn++;
         nrOfTurn %= 2;
     }

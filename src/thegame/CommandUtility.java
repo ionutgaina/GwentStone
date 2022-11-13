@@ -22,6 +22,8 @@ public final class CommandUtility {
     public static ObjectNode commandAction(ActionsInput action) {
         Game game = Game.getInstance();
         switch (action.getCommand()) {
+            case "useHeroAbility":
+                return useHeroAbility(action.getAffectedRow());
             case "useAttackHero":
                 return useAttackHero(action.getCardAttacker());
             case "cardUsesAbility":
@@ -58,6 +60,49 @@ public final class CommandUtility {
             default:
                 return null;
         }
+    }
+
+    private static ObjectNode useHeroAbility(int affectected){
+        Game game = Game.getInstance();
+        Table table = game.getTable();
+        int activePlayerIdx = game.getRound().getPlayerActive();
+        Player currentPlayer = game.getPlayer(activePlayerIdx);
+        Hero playingHero = currentPlayer.getPlayingHero();
+
+        if(currentPlayer.getMana() < playingHero.getMana()) {
+            return userHeroAbilityError(affectected, "Not enough mana to use hero's ability.");
+        }
+        if(playingHero.isFought()) {
+            return userHeroAbilityError(affectected, "Hero has already attacked this turn.");
+        }
+        String heroName = playingHero.getName();
+        if(heroName.equals("Lord Royce") || heroName.equals("Empress Thorina")) {
+            //! if isn't enemy then is friendly row
+            if (!table.isEnemyRow(affectected, activePlayerIdx)) {
+                String message = "Selected row does not belong to the enemy.";
+                return userHeroAbilityError(affectected, message);
+            }
+        }
+        if (heroName.equals("General Kocioraw") || heroName.equals("King Mudface")) {
+            //! if is enemy then isn't friendly row
+            if (table.isEnemyRow(affectected, activePlayerIdx)) {
+                String message = "Selected row does not belong to the current player.";
+                return userHeroAbilityError(affectected,message);
+            }
+        }
+
+        currentPlayer.decreaseMana(playingHero.getMana());
+        playingHero.useAbilityHero(affectected, table);
+        return null;
+    }
+
+    private static ObjectNode userHeroAbilityError(int affectedRow,String message) {
+        ObjectMapper objectMapper = new ObjectMapper();
+        ObjectNode output = objectMapper.createObjectNode();
+        output.put("command", "useHeroAbility");
+        output.putPOJO("affectedRow", affectedRow);
+        output.put("error", message);
+        return output;
     }
 
     private static ObjectNode useAttackHero(Coordinates attacker) {

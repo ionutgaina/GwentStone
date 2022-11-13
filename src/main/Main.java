@@ -76,7 +76,7 @@ public final class Main {
 
         ArrayNode output = objectMapper.createArrayNode();
         System.out.println(CheckerConstants.TESTS_PATH + filePath1);
-        //TODO add here the entry point to your implementation
+
         Player playerOne = new Player(1);
         playerOne.setDecks(inputData.getPlayerOneDecks());
 

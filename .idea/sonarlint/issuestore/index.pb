@@ -27,8 +27,6 @@ L
 ref/ref_test18_big_game.json,4/a/4a0e5dacd111352d503da8700cfe96c9f0c02035
 X
 (ref/ref_test04_use_environment_card.json,c/f/cfa981c1cdc7a9d6cf30d413329744dcb2ef198c
-I
-src/fileio/CardInput.java,4/6/4654c4b704a57589ae0376d9d6c94843540ea287
 [
 +result/out_test04_use_environment_card.json,e/c/ec1e05405c68ec0b8d424f554b5aaf6c646859f0
 `
@@ -39,3 +37,47 @@ c
 3result/out_test05_use_environment_card_invalid.json,c/b/cb2cdaa219c6057309ffa95bbca86c5879a82366
 J
 src/thegame/play/Hand.java,5/0/50d010ff6d8955020525cb553d10fcfdc1529386
+K
+src/fileio/Coordinates.java,3/a/3a45e4828df0d9ecfa877560496b32031b093007
+O
+ref/ref_test06_attack_card.json,e/0/e064d6ade0806da4546a3ee4db8b173111b5a301
+K
+src/thegame/play/Table.java,9/f/9f222dda0316d9a0d6aab38dce54336da3b35164
+U
+%input/test07_attack_card_invalid.json,d/f/df9df2acde977018e6ff8111243c0b6dda4b2ebe
+Z
+*result/out_test07_attack_card_invalid.json,4/2/42a12c3e1ec3342db057b6bb485a4b5fe4770fb2
+W
+'ref/ref_test07_attack_card_invalid.json,f/3/f31065ad0811a2efafadd8069ef75ff2201a85a6
+9
+	README.md,8/e/8ec9a00bfd09b3190ac6b22251dbb1aa95a0579d
+R
+"input/test08_use_card_ability.json,6/1/610633b6195c1501cebde30abbfb7ed4e7a3a9cf
+J
+src/thegame/play/Deck.java,6/6/66e3a9f65bfc9ccb9608f9a6784cd344186b74ca
+T
+$ref/ref_test08_use_card_ability.json,1/9/190a6611cda6c0337dec7f83959adb15c75f539f
+\
+,ref/ref_test09_use_card_ability_invalid.json,7/6/760dbb8dcf74b35e80b711e8f978d0d7b9843460
+W
+'result/out_test08_use_card_ability.json,b/1/b1f02800c5becf57dc0dc1208dbcd655a63115e0
+_
+/result/out_test09_use_card_ability_invalid.json,2/f/2f12ea5840dcf3390349c68de0bd00b95a92684a
+a
+1result/out_test15_use_hero_ability_2_invalid.json,2/1/216a4446806b4d6c2ff549e020c8e379f49b508e
+]
+-result/out_test17_multiple_games_invalid.json,2/5/259a46709814437d97716f46ac6c5bdd289091a1
+[
++result/out_test16_multiple_games_valid.json,2/e/2e7a4b4b9c3f9279dae4e354a7a94c283b3729a7
+Y
+)result/out_test14_use_hero_ability_2.json,b/b/bb2dbdad93f3aac96a1ee6c73ab5bf0d380d087c
+O
+result/out_test18_big_game.json,4/7/47f0436f56b90e4ce5bba89b0018425feb6cd264
+O
+ref/ref_test10_attack_hero.json,7/0/70d97491d97ce1327e934dcd70c498063d4aba09
+Z
+*result/out_test11_attack_hero_invalid.json,8/1/81bd0b63be4f4be82cdce9951829d4311635bfc9
+R
+"result/out_test10_attack_hero.json,9/7/978221849715c0007a9d357e78af065b5f8949fb
+W
+'ref/ref_test11_attack_hero_invalid.json,4/1/410f1a84bb3724c23839c1587110f72182538b9b

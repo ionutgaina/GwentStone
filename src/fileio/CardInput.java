@@ -44,7 +44,7 @@ public class CardInput {
         return attackDamage;
     }
 
-    public void setAttackDamage(final int attackDamage) {
+    public void setAttackDamage(int attackDamage) {
         this.attackDamage = attackDamage;
     }
 

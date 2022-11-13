@@ -6,7 +6,6 @@ import fileio.Coordinates;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import thegame.play.Game;
-import thegame.play.Table;
 
 import java.util.ArrayList;
 
