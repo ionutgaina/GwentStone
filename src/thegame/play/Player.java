@@ -12,6 +12,7 @@ import java.util.ArrayList;
 @Data
 public class Player {
     private static final int MAX_MANA = 10;
+    private static final int HERO_MAX_HEALTH = 30;
 
     //! Statistics
     private final int id;
@@ -53,6 +54,7 @@ public class Player {
 
         playingHand = new Hand();
         playingHero = new Hero(hero);
+        playingHero.setHealth(HERO_MAX_HEALTH);
         nrOfGame++;
     }
 

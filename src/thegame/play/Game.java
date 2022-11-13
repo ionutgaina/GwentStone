@@ -31,6 +31,7 @@ public class Game {
     public Player getPlayer(int playerIdx) {
         return (playerIdx == 1 ? playerOne : playerTwo);
     }
+    public Player getEnemyPlayer(int playerIdx) { return (playerIdx == 1 ? playerTwo : playerOne); }
 
     public Round getRound() {
         return round;

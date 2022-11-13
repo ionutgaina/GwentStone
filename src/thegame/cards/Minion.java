@@ -73,6 +73,10 @@ public class Minion extends CardInput {
         if (targetMinion.getHealth() <= 0)
             row.remove(targetMinion);
     }
+    public void attackHero(Hero heroTarget){
+        heroTarget.setHealth(heroTarget.getHealth() - this.getAttackDamage());
+        this.setFought(true);
+    }
 
     public void attackCard(Coordinates target){
         Game game = Game.getInstance();

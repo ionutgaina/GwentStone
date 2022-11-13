@@ -129,6 +129,13 @@
     "name" : "Berserker"
   }
 }, {
+  "command" : "useAttackHero",
+  "cardAttacker" : {
+    "x" : 0,
+    "y" : 0
+  },
+  "error" : "Attacked card is not of type 'Tank'."
+}, {
   "command" : "getPlayerTurn",
   "output" : 2
 }, {
@@ -182,6 +189,8 @@
 }, {
   "command" : "getPlayerTurn",
   "output" : 2
+}, {
+  "gameEnded" : "Player one killed the enemy hero."
 }, {
   "command" : "getCardsOnTable",
   "output" : [ [ {

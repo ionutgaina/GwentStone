@@ -8,13 +8,16 @@ import lombok.EqualsAndHashCode;
 @Data
 @EqualsAndHashCode(callSuper = false)
 public class Hero extends CardInput {
-    private static final int HERO_MAX_HEALTH = 30;
 
     @JsonIgnore
     private int attackDamage;
 
     public Hero(CardInput card) {
         super(card);
-        setHealth(HERO_MAX_HEALTH);
+    }
+
+   @JsonIgnore
+    public boolean isDead() {
+        return this.getHealth() <= 0;
     }
 }

@@ -25,8 +25,6 @@ Z
 *ref/ref_test17_multiple_games_invalid.json,1/5/15acf7ee3e4c880aa791d9f54162faed562a53fe
 L
 ref/ref_test18_big_game.json,4/a/4a0e5dacd111352d503da8700cfe96c9f0c02035
-K
-src/thegame/cards/Hero.java,b/a/ba75552660dc79575f584e8333622df6020f486e
 X
 (ref/ref_test04_use_environment_card.json,c/f/cfa981c1cdc7a9d6cf30d413329744dcb2ef198c
 I
@@ -39,7 +37,5 @@ I
 .input/test05_use_environment_card_invalid.json,5/9/59909352af388dc319095ef4b5f312c09694b6d9
 c
 3result/out_test05_use_environment_card_invalid.json,c/b/cb2cdaa219c6057309ffa95bbca86c5879a82366
-L
-src/thegame/play/Player.java,8/f/8f675befcae0dd39c2c39efa77837ffc66e7b757
 J
 src/thegame/play/Hand.java,5/0/50d010ff6d8955020525cb553d10fcfdc1529386

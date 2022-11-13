@@ -22,6 +22,8 @@ public final class CommandUtility {
     public static ObjectNode commandAction(ActionsInput action) {
         Game game = Game.getInstance();
         switch (action.getCommand()) {
+            case "useAttackHero":
+                return useAttackHero(action.getCardAttacker());
             case "cardUsesAbility":
                 return cardUsesAbility(action.getCardAttacker(), action.getCardAttacked(), game.getTable());
             case "cardUsesAttack":
@@ -56,6 +58,44 @@ public final class CommandUtility {
             default:
                 return null;
         }
+    }
+
+    private static ObjectNode useAttackHero(Coordinates attacker) {
+        Game game = Game.getInstance();
+        Table table = game.getTable();
+        Minion attackerMinion = table.getCard(attacker.getX(), attacker.getY());
+
+        if (attackerMinion.isFrozen())
+            return useAttackHeroError(attacker, "Attacker card is frozen.");
+
+        if (attackerMinion.isFought())
+            return useAttackHeroError(attacker, "Attacker card has already attacked this turn.");
+
+        int activePlayer = game.getRound().getPlayerActive();
+        if (table.enemyIsHavingTank(activePlayer))
+            return useAttackHeroError(attacker,"Attacked card is not of type 'Tank'.");
+
+        Hero attackedHero = game.getEnemyPlayer(activePlayer).getPlayingHero();
+        attackerMinion.attackHero(attackedHero);
+        if(attackedHero.isDead())
+            return gameEnded(activePlayer);
+
+        return null;
+    }
+    private static ObjectNode gameEnded(int activePlayer) {
+        ObjectMapper objectMapper = new ObjectMapper();
+        ObjectNode output = objectMapper.createObjectNode();
+        output.put("gameEnded", (activePlayer == 1 ? "Player one" : "Player two") + " killed the enemy hero.");
+        return output;
+    }
+
+    private static ObjectNode useAttackHeroError(Coordinates attacker, String message) {
+        ObjectMapper objectMapper = new ObjectMapper();
+        ObjectNode output = objectMapper.createObjectNode();
+        output.put("command", "useAttackHero");
+        output.putPOJO("cardAttacker", attacker);
+        output.put("error", message);
+        return output;
     }
 
     private static ObjectNode cardUsesAbility(Coordinates attacker, Coordinates attacked, Table table) {

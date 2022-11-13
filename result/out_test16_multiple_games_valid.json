@@ -74,6 +74,8 @@
     "name" : "Berserker"
   }
 }, {
+  "gameEnded" : "Player two killed the enemy hero."
+}, {
   "command" : "getPlayerMana",
   "playerIdx" : 2,
   "output" : 4
@@ -232,6 +234,8 @@
   "command" : "getPlayerMana",
   "playerIdx" : 1,
   "output" : 4
+}, {
+  "gameEnded" : "Player one killed the enemy hero."
 }, {
   "command" : "getPlayerMana",
   "playerIdx" : 1,

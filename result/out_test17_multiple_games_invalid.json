@@ -75,6 +75,8 @@
   "command" : "getFrozenCardsOnTable",
   "output" : [ ]
 }, {
+  "gameEnded" : "Player two killed the enemy hero."
+}, {
   "command" : "getCardsOnTable",
   "output" : [ [ {
     "mana" : 1,
@@ -215,6 +217,13 @@
   "command" : "getFrozenCardsOnTable",
   "output" : [ ]
 }, {
+  "command" : "useAttackHero",
+  "cardAttacker" : {
+    "x" : 1,
+    "y" : 1
+  },
+  "error" : "Attacked card is not of type 'Tank'."
+}, {
   "command" : "getCardAtPosition",
   "output" : {
     "mana" : 2,
@@ -254,6 +263,8 @@
     "colors" : [ "Brown", "Blue" ],
     "name" : "Warden"
   }
+}, {
+  "gameEnded" : "Player one killed the enemy hero."
 }, {
   "command" : "getCardsOnTable",
   "output" : [ [ {
