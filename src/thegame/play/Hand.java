@@ -8,7 +8,7 @@ import thegame.cards.Environment;
 import java.util.ArrayList;
 
 @Data
-public class Hand {
+public final class Hand {
     private ArrayList<CardInput> cards;
 
     @JsonIgnore
@@ -17,31 +17,41 @@ public class Hand {
     public Hand() {
         this.cards = new ArrayList<>();
     }
-    public Hand(Hand hand) {
+
+    public Hand(final Hand hand) {
         cards = new ArrayList<>(hand.getCards());
         nrOfCards = cards.size();
     }
 
-    public ArrayList<CardInput> getCards() {
-        return cards;
-    }
-
-    public void addCard(CardInput card) {
+    /**
+     * add a card in hand
+     * @param card card to add
+     */
+    public void addCard(final CardInput card) {
         cards.add(card);
         nrOfCards++;
     }
 
-    public void removeCard(int cardIdx) {
+    /**
+     * remove a card from hand
+     * @param cardIdx index card to discard
+     */
+    public void removeCard(final int cardIdx) {
         cards.remove(cardIdx);
         nrOfCards--;
     }
 
+    /**
+     * get environment cards from hand
+     * @return a list of environments card
+     */
     public ArrayList<Environment> getEnvironmentCards() {
         ArrayList<Environment> environmentCards = new ArrayList<>();
 
-        cards.forEach( card -> {
-            if (card.getCardType().equals("Environment"))
+        cards.forEach(card -> {
+            if (card.getCardType().equals("Environment")) {
                 environmentCards.add(new Environment(card));
+            }
         });
 
         return environmentCards;

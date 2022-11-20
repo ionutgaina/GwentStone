@@ -1,11 +1,10 @@
 package main;
 
 import checker.Checker;
-
+import checker.CheckerConstants;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectWriter;
 import com.fasterxml.jackson.databind.node.ArrayNode;
-import checker.CheckerConstants;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import fileio.ActionsInput;
 import fileio.GameInput;
@@ -35,6 +34,7 @@ public final class Main {
     /**
      * DO NOT MODIFY MAIN METHOD
      * Call the checker
+     *
      * @param args from command line
      * @throws IOException in case of exceptions to reading / writing
      */
@@ -75,7 +75,6 @@ public final class Main {
                 Input.class);
 
         ArrayNode output = objectMapper.createArrayNode();
-        System.out.println(CheckerConstants.TESTS_PATH + filePath1);
 
         Player playerOne = new Player(1);
         playerOne.setDecks(inputData.getPlayerOneDecks());
@@ -84,23 +83,29 @@ public final class Main {
         playerTwo.setDecks(inputData.getPlayerTwoDecks());
 
         Game theGame = Game.getInstance();
-        theGame.setPlayers(playerOne, playerTwo);
+        theGame.setPlayerOne(playerOne);
+        theGame.setPlayerTwo(playerTwo);
 
-        for (GameInput game: inputData.getGames()) {
+        for (GameInput game : inputData.getGames()) {
             StartGameInput startGame = game.getStartGame();
 
             playerOne.newGame(
-                    startGame.getPlayerOneDeckIdx(), startGame.getShuffleSeed(), startGame.getPlayerOneHero());
+                    startGame.getPlayerOneDeckIdx(),
+                    startGame.getShuffleSeed(),
+                    startGame.getPlayerOneHero());
             playerTwo.newGame(
-                    startGame.getPlayerTwoDeckIdx(), startGame.getShuffleSeed(), startGame.getPlayerTwoHero());
+                    startGame.getPlayerTwoDeckIdx(),
+                    startGame.getShuffleSeed(),
+                    startGame.getPlayerTwoHero());
 
             theGame.newGame(startGame.getStartingPlayer());
 
-            for (ActionsInput action: game.getActions()) {
+            for (ActionsInput action : game.getActions()) {
                 System.out.println(action.getCommand());
                 ObjectNode actionOutput = CommandUtility.commandAction(action);
-                if (actionOutput != null )
+                if (actionOutput != null) {
                     output.add(actionOutput);
+                }
             }
         }
 

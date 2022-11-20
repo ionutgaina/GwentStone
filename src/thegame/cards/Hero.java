@@ -9,11 +9,10 @@ import thegame.play.Table;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Comparator;
 
 @Data
 @EqualsAndHashCode(callSuper = false)
-public class Hero extends CardInput {
+public final class Hero extends CardInput {
 
     @JsonIgnore
     private int attackDamage;
@@ -22,20 +21,34 @@ public class Hero extends CardInput {
     @JsonIgnore
     private boolean fought = false;
 
-    public Hero(CardInput card) {
+    public Hero(final CardInput card) {
         super(card);
     }
 
-   @JsonIgnore
+    /**
+     * Method which is checking the hero dead state
+     *
+     * @return returning true if Hero is dead, otherwise false
+     */
+    @JsonIgnore
     public boolean isDead() {
         return this.getHealth() <= 0;
     }
 
+    /**
+     * method where is reseting the fought state
+     */
     public void relax() {
         this.fought = false;
     }
 
-    public void useAbilityHero(int affectedRow, Table table) {
+    /**
+     * Selecting the correct ability for the hero card
+     *
+     * @param affectedRow targeted row for ability
+     * @param table       playground of the game
+     */
+    public void useAbilityHero(final int affectedRow, final Table table) {
         switch (this.getName()) {
             case "Lord Royce":
                 abilitySubZero(affectedRow, table);
@@ -55,26 +68,26 @@ public class Hero extends CardInput {
         this.setFought(true);
     }
 
-    private void abilitySubZero(int affectedRow, Table table) {
+    private void abilitySubZero(final int affectedRow, final Table table) {
         ArrayList<Minion> row = table.getRow(affectedRow);
         Minion bigAttackMinion = Collections.max(row, new Comparators.AttackComparator());
 
         bigAttackMinion.setFrozen(true);
     }
 
-    private void abilityLowBlow(int affectedRow, Table table) {
+    private void abilityLowBlow(final int affectedRow, final Table table) {
         ArrayList<Minion> row = table.getRow(affectedRow);
 
         Minion bigHealthMinion = Collections.max(row, new Comparators.HealthComparator());
         row.remove(bigHealthMinion);
     }
 
-    private void abilityEarthBorn(int affectedRow, Table table) {
+    private void abilityEarthBorn(final int affectedRow, final Table table) {
         ArrayList<Minion> row = table.getRow(affectedRow);
         row.forEach(minion -> minion.setHealth(minion.getHealth() + 1));
     }
 
-    private void abilityBloodThirst(int affectedRow, Table table) {
+    private void abilityBloodThirst(final int affectedRow, final Table table) {
         ArrayList<Minion> row = table.getRow(affectedRow);
         row.forEach(minion -> minion.setAttackDamage(minion.getAttackDamage() + 1));
     }

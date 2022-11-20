@@ -4,15 +4,13 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import fileio.CardInput;
 import fileio.Coordinates;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
 import thegame.play.Game;
 
 import java.util.ArrayList;
 import java.util.Objects;
 
 @Data
-@EqualsAndHashCode(callSuper = false)
-public class Minion extends CardInput {
+public final class Minion extends CardInput {
 
     //! states
     @JsonIgnore
@@ -25,13 +23,19 @@ public class Minion extends CardInput {
     private boolean tank = false;
 
 
-    public Minion(CardInput card) {
+    public Minion(final CardInput card) {
         super(card);
-        if(this.getName().equals("Goliath") || this.getName().equals("Warden"))
+        if (this.getName().equals("Goliath") || this.getName().equals("Warden")) {
             this.tank = true;
+        }
     }
 
-    public void useAbilityCard(Coordinates target) {
+    /**
+     * Selecting correct ability for the minion
+     *
+     * @param target coordinates in x and y for the target card from playground
+     */
+    public void useAbilityCard(final Coordinates target) {
         Game game = Game.getInstance();
         Minion targetMinion = game.getTable().getCard(target.getX(), target.getY());
         switch (this.getName()) {
@@ -52,38 +56,50 @@ public class Minion extends CardInput {
         }
         this.setFought(true);
     }
-    private void abilityGodsPlan(Minion targetMinion) {
+
+    private void abilityGodsPlan(final Minion targetMinion) {
         targetMinion.setHealth(targetMinion.getHealth() + 2);
     }
 
-    private void abilityWeakKnees(Minion targetMinion) {
+    private void abilityWeakKnees(final Minion targetMinion) {
         targetMinion.setAttackDamage(Math.max(targetMinion.getAttackDamage() - 2, 0));
     }
 
-    private void abilitySkyJack(Minion targetMinion) {
+    private void abilitySkyJack(final Minion targetMinion) {
         int swapHealth = targetMinion.getHealth();
         targetMinion.setHealth(this.getHealth());
         this.setHealth(swapHealth);
     }
 
-    private void abilityShapeshift(Minion targetMinion, ArrayList<Minion> row) {
+    private void abilityShapeshift(final Minion targetMinion, final ArrayList<Minion> row) {
         int swapHealth = targetMinion.getHealth();
         targetMinion.setHealth(targetMinion.getAttackDamage());
         targetMinion.setAttackDamage(swapHealth);
-        if (targetMinion.getHealth() <= 0)
+        if (targetMinion.getHealth() <= 0) {
             row.remove(targetMinion);
+        }
     }
-    public void attackHero(Hero heroTarget){
+
+    /**
+     * Attack method for hero
+     *
+     * @param heroTarget which hero the minion targeted
+     */
+    public void attackHero(final Hero heroTarget) {
         heroTarget.setHealth(heroTarget.getHealth() - this.getAttackDamage());
         this.setFought(true);
     }
 
-    public void attackCard(Coordinates target){
+    /**
+     * Attack method for the minion
+     *
+     * @param target coordinates in x and y for target from the board
+     */
+    public void attackCard(final Coordinates target) {
         Game game = Game.getInstance();
         Minion targetCard = game.getTable().getCard(target.getX(), target.getY());
         targetCard.setHealth(targetCard.getHealth() - this.getAttackDamage());
-        if(targetCard.getHealth() <= 0)
-        {
+        if (targetCard.getHealth() <= 0) {
             ArrayList<Minion> targetCardRow = game.getTable().getRow(target.getX());
             System.out.println(targetCardRow);
             targetCardRow.remove(targetCard);
@@ -92,40 +108,41 @@ public class Minion extends CardInput {
         this.setFought(true);
     }
 
-    public void unfrozen() {
+    private void unfrozen() {
         frozen = false;
     }
 
-    public void relax() { fought = false; }
+    private void relax() {
+        fought = false;
+    }
 
+    /**
+     * Reseting states for the minion
+     */
     public void resetStates() {
         unfrozen();
         relax();
     }
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+    public int hashCode() {
+        return Objects.hash(super.hashCode(), frozen, fought, tank);
+    }
+
+    @Override
+    public boolean equals(final Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
         Minion minion = (Minion) o;
         return frozen == minion.frozen
                 && fought == minion.fought
                 && tank == minion.tank
-                && this.getName() == minion.getName()
+                && this.getName().equals(minion.getName())
                 && this.getHealth() == minion.getHealth()
                 && this.getAttackDamage() == minion.getAttackDamage();
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(frozen, fought, tank);
-    }
-
-    @Override
-    public String toString() {
-        return "Minion{" +
-                "name=" + this.getName() +
-                "health" + this.getHealth() +
-                '}';
     }
 }

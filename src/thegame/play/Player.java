@@ -10,7 +10,7 @@ import thegame.cards.Minion;
 import java.util.ArrayList;
 
 @Data
-public class Player {
+public final class Player {
     private static final int MAX_MANA = 10;
     private static final int HERO_MAX_HEALTH = 30;
 
@@ -28,25 +28,18 @@ public class Player {
     //! Stats
     private int mana;
 
-    public Player(int playerIdx) {
+    public Player(final int playerIdx) {
         id = playerIdx;
     }
 
-    public int getId() {
-        return id;
-    }
-
-    public Deck getPlayingDeck() {
-        return playingDeck;
-    }
-
-    public Hero getPlayingHero() { return playingHero; }
-
-    public Hand getPlayingHand() { return playingHand; }
-
-    public int getMana() { return mana; }
-
-    public void newGame(int deckIdx, int shuffleSeed, CardInput hero) {
+    /**
+     * Reseting the game for a new game
+     *
+     * @param deckIdx     deckIdx from inputGame
+     * @param shuffleSeed Seed for shuffling the deck
+     * @param hero        Hero from server
+     */
+    public void newGame(final int deckIdx, final int shuffleSeed, final CardInput hero) {
         playingDeck = new Deck(inputDecks.getDecks().get(deckIdx));
         playingDeck.shuffleCards(shuffleSeed);
 
@@ -58,30 +51,55 @@ public class Player {
         nrOfGame++;
     }
 
-    public void setDecks(DecksInput input) {
+    /**
+     * setDeck
+     *
+     * @param input input from server for setting the deck
+     */
+    public void setDecks(final DecksInput input) {
         inputDecks.setDecks(new ArrayList<>(input.getDecks()));
         inputDecks.setNrDecks(input.getNrDecks());
         inputDecks.setNrCardsInDeck(input.getNrCardsInDeck());
     }
 
+    /**
+     * Method for drawing a card
+     */
     public void drawCard() {
         CardInput drawnCard = playingDeck.getFirstCard();
-        if(drawnCard == null)
+        if (drawnCard == null) {
             return;
+        }
 
-        if (drawnCard.getCardType().equals("Environment"))
+        if (drawnCard.getCardType().equals("Environment")) {
             playingHand.addCard(new Environment(drawnCard));
-        else
+        } else {
             playingHand.addCard(new Minion(drawnCard));
+        }
     }
 
-    public void increaseMana(int incMana) {
+    /**
+     * method where we increase mana for the player
+     *
+     * @param incMana amount of mana to increase
+     */
+    public void increaseMana(final int incMana) {
         mana += incMana;
     }
 
-    public void decreaseMana(int decMana) {
+    /**
+     * Decrease mana method for the player
+     *
+     * @param decMana amount of mana to decrease
+     */
+    public void decreaseMana(final int decMana) {
         mana -= decMana;
     }
 
-    public void increaseWinnings() { nrOfWin++; }
+    /**
+     * method if the player won
+     */
+    public void increaseWinnings() {
+        nrOfWin++;
+    }
 }

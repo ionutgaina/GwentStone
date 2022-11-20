@@ -1,7 +1,0 @@
-
-r
-java:S3655<"PCall "Optional#isPresent()" or "!Optional#isEmpty()" before accessing the value.(¦’™ùÿÿÿÿ8÷¶ÎùÆ0
-c
-java:S1612<"AReplace this lambda with method reference 'CardInput::getHealth'.(¦’™ùÿÿÿÿ8û¶ÎùÆ0
-R
-java:S1128"0Remove this unused import 'thegame.Comparators'.(”™ç’øÿÿÿÿ8ü¶ÎùÆ0
