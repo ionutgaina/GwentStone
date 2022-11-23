@@ -4,7 +4,6 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import fileio.CardInput;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-import thegame.Comparators;
 import thegame.play.Table;
 
 import java.util.ArrayList;
@@ -70,7 +69,7 @@ public final class Hero extends CardInput {
 
     private void abilitySubZero(final int affectedRow, final Table table) {
         ArrayList<Minion> row = table.getRow(affectedRow);
-        Minion bigAttackMinion = Collections.max(row, new Comparators.AttackComparator());
+        Minion bigAttackMinion = Collections.max(row, new Minion.AttackComparator());
 
         bigAttackMinion.setFrozen(true);
     }
@@ -78,7 +77,7 @@ public final class Hero extends CardInput {
     private void abilityLowBlow(final int affectedRow, final Table table) {
         ArrayList<Minion> row = table.getRow(affectedRow);
 
-        Minion bigHealthMinion = Collections.max(row, new Comparators.HealthComparator());
+        Minion bigHealthMinion = Collections.max(row, new Minion.HealthComparator());
         row.remove(bigHealthMinion);
     }
 

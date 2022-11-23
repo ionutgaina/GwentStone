@@ -4,7 +4,6 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import fileio.CardInput;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-import thegame.Comparators;
 import thegame.play.Table;
 
 import java.util.ArrayList;
@@ -65,7 +64,7 @@ public final class Environment extends CardInput {
     private void effectHeartHound(final Table table, final int affectedRow) {
         ArrayList<Minion> enemyRow = table.getRow(affectedRow);
         if (enemyRow != null) {
-            Minion bigHealthMinion = Collections.max(enemyRow, new Comparators.HealthComparator());
+            Minion bigHealthMinion = Collections.max(enemyRow, new Minion.HealthComparator());
 
             ArrayList<Minion> friendlyRow = table.getReflectedRow(affectedRow);
             friendlyRow.add(bigHealthMinion);

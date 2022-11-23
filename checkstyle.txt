@@ -1,5 +1,2 @@
 Starting audit...
-[ERROR] /home/gionut/Projects/Facultate/POO/GwentStone/./src/thegame/Comparators.java:13:9: Class 'HealthComparator' looks like designed for extension (can be subclassed), but the method 'compare' does not have javadoc that explains how to do that safely. If class is not designed for extension consider making the class 'HealthComparator' final or making the method 'compare' static/final/abstract/empty, or adding allowed annotation for the method. [DesignForExtension]
-[ERROR] /home/gionut/Projects/Facultate/POO/GwentStone/./src/thegame/Comparators.java:23:9: Class 'AttackComparator' looks like designed for extension (can be subclassed), but the method 'compare' does not have javadoc that explains how to do that safely. If class is not designed for extension consider making the class 'AttackComparator' final or making the method 'compare' static/final/abstract/empty, or adding allowed annotation for the method. [DesignForExtension]
 Audit done.
-Checkstyle ends with 2 errors.

@@ -7,6 +7,7 @@ import lombok.Data;
 import thegame.play.Game;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.Objects;
 
 @Data
@@ -144,5 +145,25 @@ public final class Minion extends CardInput {
                 && this.getName().equals(minion.getName())
                 && this.getHealth() == minion.getHealth()
                 && this.getAttackDamage() == minion.getAttackDamage();
+    }
+
+    /**
+     * Comparator for minion health
+     */
+    protected static final class HealthComparator implements Comparator<Minion> {
+        @Override
+        public int compare(final Minion o1, final Minion o2) {
+            return o1.getHealth() - o2.getHealth();
+        }
+    }
+
+    /**
+     * Comparator for minion AttackDamage
+     */
+    protected static final class AttackComparator implements Comparator<Minion> {
+        @Override
+        public int compare(final Minion o1, final Minion o2) {
+            return o1.getAttackDamage() - o2.getAttackDamage();
+        }
     }
 }
