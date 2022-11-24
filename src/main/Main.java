@@ -101,6 +101,7 @@ public final class Main {
             theGame.newGame(startGame.getStartingPlayer());
 
             for (ActionsInput action : game.getActions()) {
+                System.out.println(action.getCommand());
                 ObjectNode actionOutput = CommandUtility.commandAction(action);
                 if (actionOutput != null) {
                     output.add(actionOutput);

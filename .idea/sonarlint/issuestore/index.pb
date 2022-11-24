@@ -95,3 +95,31 @@ V
 &input/test16_multiple_games_valid.json,a/5/a554ba13f7f1725e05b8789c55c6e831e7778c6a
 J
 src/fileio/DecksInput.java,d/1/d1b58329ca1d4536db4cefc46e6ed68931ae364c
+J
+src/thegame/play/Game.java,a/8/a8103932dbb68b832b45967416790c2d65ac081d
+L
+src/thegame/play/Player.java,8/f/8f675befcae0dd39c2c39efa77837ffc66e7b757
+J
+src/thegame/play/Deck.java,6/6/66e3a9f65bfc9ccb9608f9a6784cd344186b74ca
+K
+src/thegame/play/Round.java,5/9/590f253aa043051155b4692ba9f301f8a2f869a9
+K
+src/thegame/play/Table.java,9/f/9f222dda0316d9a0d6aab38dce54336da3b35164
+I
+src/fileio/CardInput.java,4/6/4654c4b704a57589ae0376d9d6c94843540ea287
+J
+src/thegame/play/Hand.java,5/0/50d010ff6d8955020525cb553d10fcfdc1529386
+O
+src/thegame/CommandUtility.java,f/b/fb2586ff470b5b4e416bbcbf6885f5d531e5841c
+>
+checkstyle.txt,c/d/cdb790f6f44f5d0c42c935800fc1cd7564327cec
+K
+src/thegame/cards/Hero.java,b/a/ba75552660dc79575f584e8333622df6020f486e
+R
+"src/thegame/cards/Environment.java,8/a/8a8ee9350ce55e6e97242603858e612f2d3a2bc1
+M
+src/thegame/cards/Minion.java,e/0/e0260d48ccc1954d42fa66608eb47af139dd00f3
+B
+src/main/Main.java,f/e/fe03b4fd3afe162c6e01309b98a22588e093d274
+9
+	README.md,8/e/8ec9a00bfd09b3190ac6b22251dbb1aa95a0579d

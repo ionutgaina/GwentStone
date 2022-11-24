@@ -102,9 +102,7 @@ public final class Minion extends CardInput {
         targetCard.setHealth(targetCard.getHealth() - this.getAttackDamage());
         if (targetCard.getHealth() <= 0) {
             ArrayList<Minion> targetCardRow = game.getTable().getRow(target.getX());
-            System.out.println(targetCardRow);
             targetCardRow.remove(targetCard);
-            System.out.println(targetCardRow);
         }
         this.setFought(true);
     }
